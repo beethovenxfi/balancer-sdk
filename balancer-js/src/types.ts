@@ -25,7 +25,12 @@ export interface BalancerSdkSorConfig {
     fetchOnChainBalances: boolean;
 }
 
-export type BalancerLinearPoolType = 'aave' | 'yearn' | 'boo';
+export type BalancerLinearPoolType =
+    | 'aave'
+    | 'yearn'
+    | 'boo'
+    | 'reaper'
+    | 'tarot';
 
 export interface BalancerNetworkConfig {
     chainId: Network;

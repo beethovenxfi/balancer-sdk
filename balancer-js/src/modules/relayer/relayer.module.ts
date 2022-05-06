@@ -36,6 +36,8 @@ import { MasterChefStakingService } from '@/modules/relayer/extensions/masterche
 import { YearnWrappingService } from '@/modules/relayer/extensions/yearn-wrapping.service';
 import { AaveWrappingService } from '@/modules/relayer/extensions/aave-wrapping.service';
 import { VaultActionsService } from '@/modules/relayer/extensions/vault-actions.service';
+import { ReaperVaultService } from '@/modules/relayer/extensions/reaper-vault.service';
+import { TarotSupplyVaultService } from '@/modules/relayer/extensions/tarot-supply-vault.service';
 
 export * from './types';
 
@@ -44,6 +46,8 @@ export class Relayer {
     private vaultActionsService: VaultActionsService;
     private aaveWrappingService: AaveWrappingService;
     private booMirrorWorldStaking: BooMirrorWorldStakingService;
+    private reaperVaultService: ReaperVaultService;
+    private tarotSupplyVaultService: TarotSupplyVaultService;
     private fBeetsBarStakingService: FBeetsBarStakingService;
     private masterChefStakingService: MasterChefStakingService;
     private yearnWrappingService: YearnWrappingService;
@@ -56,6 +60,8 @@ export class Relayer {
         this.vaultActionsService = new VaultActionsService();
         this.aaveWrappingService = new AaveWrappingService();
         this.booMirrorWorldStaking = new BooMirrorWorldStakingService();
+        this.reaperVaultService = new ReaperVaultService();
+        this.tarotSupplyVaultService = new TarotSupplyVaultService();
         this.fBeetsBarStakingService = new FBeetsBarStakingService();
         this.masterChefStakingService = new MasterChefStakingService();
         this.yearnWrappingService = new YearnWrappingService();
@@ -991,6 +997,28 @@ export class Relayer {
                 case 'boo':
                     unwrapCalls.push(
                         this.booMirrorWorldStaking.encodeLeave({
+                            sender: funds.recipient, // This should be relayer
+                            recipient: funds.sender, // This will be caller
+                            amount: key, // Use output of swap as input for unwrap
+                            outputReference: 0,
+                        })
+                    );
+                    break;
+                case 'reaper':
+                    unwrapCalls.push(
+                        this.reaperVaultService.encodeUnwrap({
+                            vaultToken: wrappedToken,
+                            sender: funds.recipient, // This should be relayer
+                            recipient: funds.sender, // This will be caller
+                            amount: key, // Use output of swap as input for unwrap
+                            outputReference: 0,
+                        })
+                    );
+                    break;
+                case 'tarot':
+                    unwrapCalls.push(
+                        this.tarotSupplyVaultService.encodeLeave({
+                            supplyVault: wrappedToken,
                             sender: funds.recipient, // This should be relayer
                             recipient: funds.sender, // This will be caller
                             amount: key, // Use output of swap as input for unwrap

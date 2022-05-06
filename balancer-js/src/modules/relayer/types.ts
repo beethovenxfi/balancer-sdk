@@ -125,6 +125,38 @@ export interface EncodeBooMirrorWorldLeaveInput {
     outputReference: BigNumberish;
 }
 
+export interface EncodeTarotEnterInput {
+    supplyVault: string;
+    sender: string;
+    recipient: string;
+    amount: BigNumberish;
+    outputReference: BigNumberish;
+}
+
+export interface EncodeTarotLeaveInput {
+    supplyVault: string;
+    sender: string;
+    recipient: string;
+    amount: BigNumberish;
+    outputReference: BigNumberish;
+}
+
+export interface EncodeReaperWrapInput {
+    vaultToken: string;
+    sender: string;
+    recipient: string;
+    amount: BigNumberish;
+    outputReference: BigNumberish;
+}
+
+export interface EncodeReaperUnwrapInput {
+    vaultToken: string;
+    sender: string;
+    recipient: string;
+    amount: BigNumberish;
+    outputReference: BigNumberish;
+}
+
 export interface EncodeFBeetsBarEnterInput {
     sender: string;
     recipient: string;
