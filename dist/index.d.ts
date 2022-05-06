@@ -169,7 +169,7 @@ interface BalancerSdkSorConfig {
     poolDataService: 'subgraph' | PoolDataService;
     fetchOnChainBalances: boolean;
 }
-declare type BalancerLinearPoolType = 'aave' | 'yearn' | 'boo';
+declare type BalancerLinearPoolType = 'aave' | 'yearn' | 'boo' | 'reaper' | 'tarot';
 interface BalancerNetworkConfig {
     chainId: Network;
     addresses: {
@@ -603,6 +603,34 @@ interface EncodeBooMirrorWorldLeaveInput {
     amount: BigNumberish;
     outputReference: BigNumberish;
 }
+interface EncodeTarotEnterInput {
+    supplyVault: string;
+    sender: string;
+    recipient: string;
+    amount: BigNumberish;
+    outputReference: BigNumberish;
+}
+interface EncodeTarotLeaveInput {
+    supplyVault: string;
+    sender: string;
+    recipient: string;
+    amount: BigNumberish;
+    outputReference: BigNumberish;
+}
+interface EncodeReaperWrapInput {
+    vaultToken: string;
+    sender: string;
+    recipient: string;
+    amount: BigNumberish;
+    outputReference: BigNumberish;
+}
+interface EncodeReaperUnwrapInput {
+    vaultToken: string;
+    sender: string;
+    recipient: string;
+    amount: BigNumberish;
+    outputReference: BigNumberish;
+}
 interface EncodeFBeetsBarEnterInput {
     sender: string;
     recipient: string;
@@ -637,6 +665,8 @@ declare class Relayer {
     private vaultActionsService;
     private aaveWrappingService;
     private booMirrorWorldStaking;
+    private reaperVaultService;
+    private tarotSupplyVaultService;
     private fBeetsBarStakingService;
     private masterChefStakingService;
     private yearnWrappingService;
@@ -1906,4 +1936,4 @@ declare class BalancerSDK {
     get networkConfig(): BalancerNetworkConfig;
 }
 
-export { AaveHelpers, Account, AssetHelpers, BalancerErrors, BalancerLinearPoolType, BalancerNetworkConfig, BalancerSDK, BalancerSdkConfig, BalancerSdkSorConfig, BatchRelayerJoinPool, BatchSwap, BatchSwapStep, EncodeBatchSwapInput, EncodeBooMirrorWorldEnterInput, EncodeBooMirrorWorldLeaveInput, EncodeExitPoolInput, EncodeFBeetsBarEnterInput, EncodeFBeetsBarLeaveInput, EncodeJoinPoolInput, EncodeMasterChefDepositInput, EncodeMasterChefWithdrawInput, EncodeUnwrapAaveStaticTokenInput, EncodeUnwrapYearnVaultTokenInput, ExitAndBatchSwapExitItemInput, ExitAndBatchSwapInput, ExitPoolData, ExitPoolRequest, ExitStablePhantomInput, FetchPoolsInput, FundManagement, JoinPoolRequest, ManagedPoolEncoder, NestedLinearPool, Network, OutputReference, PoolBalanceOp, PoolBalanceOpKind, PoolReference, PoolSpecialization, QueryWithSorInput, QueryWithSorOutput, Relayer, RelayerAction, RelayerAuthorization, SingleSwap, Sor, StablePhantomPoolJoinKind, StablePoolEncoder, StablePoolExitKind, StablePoolJoinKind, Subgraph, Swap, SwapType, Swaps, TransactionData, UserBalanceOp, UserBalanceOpKind, WeightedPoolEncoder, WeightedPoolExitKind, WeightedPoolJoinKind, accountToAddress, getLimitsForSlippage, getPoolAddress, getPoolNonce, getPoolSpecialization, isNormalizedWeights, isSameAddress, signPermit, splitPoolId, toNormalizedWeights };
+export { AaveHelpers, Account, AssetHelpers, BalancerErrors, BalancerLinearPoolType, BalancerNetworkConfig, BalancerSDK, BalancerSdkConfig, BalancerSdkSorConfig, BatchRelayerJoinPool, BatchSwap, BatchSwapStep, EncodeBatchSwapInput, EncodeBooMirrorWorldEnterInput, EncodeBooMirrorWorldLeaveInput, EncodeExitPoolInput, EncodeFBeetsBarEnterInput, EncodeFBeetsBarLeaveInput, EncodeJoinPoolInput, EncodeMasterChefDepositInput, EncodeMasterChefWithdrawInput, EncodeReaperUnwrapInput, EncodeReaperWrapInput, EncodeTarotEnterInput, EncodeTarotLeaveInput, EncodeUnwrapAaveStaticTokenInput, EncodeUnwrapYearnVaultTokenInput, ExitAndBatchSwapExitItemInput, ExitAndBatchSwapInput, ExitPoolData, ExitPoolRequest, ExitStablePhantomInput, FetchPoolsInput, FundManagement, JoinPoolRequest, ManagedPoolEncoder, NestedLinearPool, Network, OutputReference, PoolBalanceOp, PoolBalanceOpKind, PoolReference, PoolSpecialization, QueryWithSorInput, QueryWithSorOutput, Relayer, RelayerAction, RelayerAuthorization, SingleSwap, Sor, StablePhantomPoolJoinKind, StablePoolEncoder, StablePoolExitKind, StablePoolJoinKind, Subgraph, Swap, SwapType, Swaps, TransactionData, UserBalanceOp, UserBalanceOpKind, WeightedPoolEncoder, WeightedPoolExitKind, WeightedPoolJoinKind, accountToAddress, getLimitsForSlippage, getPoolAddress, getPoolNonce, getPoolSpecialization, isNormalizedWeights, isSameAddress, signPermit, splitPoolId, toNormalizedWeights };

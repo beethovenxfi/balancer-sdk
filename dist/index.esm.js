@@ -8434,6 +8434,260 @@ class VaultActionsService {
     }
 }
 
+var reaperWrappingAbi = [
+	{
+		inputs: [
+			{
+				internalType: "contract IERC20",
+				name: "token",
+				type: "address"
+			},
+			{
+				internalType: "uint256",
+				name: "amount",
+				type: "uint256"
+			}
+		],
+		name: "approveVault",
+		outputs: [
+		],
+		stateMutability: "nonpayable",
+		type: "function"
+	},
+	{
+		inputs: [
+		],
+		name: "getVault",
+		outputs: [
+			{
+				internalType: "contract IVault",
+				name: "",
+				type: "address"
+			}
+		],
+		stateMutability: "view",
+		type: "function"
+	},
+	{
+		inputs: [
+			{
+				internalType: "contract IReaperTokenVault",
+				name: "vaultToken",
+				type: "address"
+			},
+			{
+				internalType: "address",
+				name: "sender",
+				type: "address"
+			},
+			{
+				internalType: "address",
+				name: "recipient",
+				type: "address"
+			},
+			{
+				internalType: "uint256",
+				name: "amount",
+				type: "uint256"
+			},
+			{
+				internalType: "uint256",
+				name: "outputReference",
+				type: "uint256"
+			}
+		],
+		name: "unwrapReaperVaultToken",
+		outputs: [
+		],
+		stateMutability: "payable",
+		type: "function"
+	},
+	{
+		inputs: [
+			{
+				internalType: "contract IReaperTokenVault",
+				name: "vaultToken",
+				type: "address"
+			},
+			{
+				internalType: "address",
+				name: "sender",
+				type: "address"
+			},
+			{
+				internalType: "address",
+				name: "recipient",
+				type: "address"
+			},
+			{
+				internalType: "uint256",
+				name: "amount",
+				type: "uint256"
+			},
+			{
+				internalType: "uint256",
+				name: "outputReference",
+				type: "uint256"
+			}
+		],
+		name: "wrapReaperVaultToken",
+		outputs: [
+		],
+		stateMutability: "payable",
+		type: "function"
+	}
+];
+
+class ReaperVaultService {
+    encodeWrap(params) {
+        const reaperWrappingLibrary = new Interface(reaperWrappingAbi);
+        return reaperWrappingLibrary.encodeFunctionData('wrapReaperVaultToken', [
+            params.vaultToken,
+            params.sender,
+            params.recipient,
+            params.amount,
+            params.outputReference,
+        ]);
+    }
+    encodeUnwrap(params) {
+        const reaperWrappingLibrary = new Interface(reaperWrappingAbi);
+        return reaperWrappingLibrary.encodeFunctionData('unwrapReaperVaultToken', [
+            params.vaultToken,
+            params.sender,
+            params.recipient,
+            params.amount,
+            params.outputReference,
+        ]);
+    }
+}
+
+var tarotWrappingAbi = [
+	{
+		inputs: [
+			{
+				internalType: "contract IERC20",
+				name: "token",
+				type: "address"
+			},
+			{
+				internalType: "uint256",
+				name: "amount",
+				type: "uint256"
+			}
+		],
+		name: "approveVault",
+		outputs: [
+		],
+		stateMutability: "nonpayable",
+		type: "function"
+	},
+	{
+		inputs: [
+		],
+		name: "getVault",
+		outputs: [
+			{
+				internalType: "contract IVault",
+				name: "",
+				type: "address"
+			}
+		],
+		stateMutability: "view",
+		type: "function"
+	},
+	{
+		inputs: [
+			{
+				internalType: "contract ITarotSupplyVault",
+				name: "supplyVault",
+				type: "address"
+			},
+			{
+				internalType: "address",
+				name: "sender",
+				type: "address"
+			},
+			{
+				internalType: "address",
+				name: "recipient",
+				type: "address"
+			},
+			{
+				internalType: "uint256",
+				name: "amount",
+				type: "uint256"
+			},
+			{
+				internalType: "uint256",
+				name: "outputReference",
+				type: "uint256"
+			}
+		],
+		name: "tarotSupplyVaultEnter",
+		outputs: [
+		],
+		stateMutability: "payable",
+		type: "function"
+	},
+	{
+		inputs: [
+			{
+				internalType: "contract ITarotSupplyVault",
+				name: "supplyVault",
+				type: "address"
+			},
+			{
+				internalType: "address",
+				name: "sender",
+				type: "address"
+			},
+			{
+				internalType: "address",
+				name: "recipient",
+				type: "address"
+			},
+			{
+				internalType: "uint256",
+				name: "amount",
+				type: "uint256"
+			},
+			{
+				internalType: "uint256",
+				name: "outputReference",
+				type: "uint256"
+			}
+		],
+		name: "tarotSupplyVaultLeave",
+		outputs: [
+		],
+		stateMutability: "payable",
+		type: "function"
+	}
+];
+
+class TarotSupplyVaultService {
+    encodeEnter(params) {
+        const tarotWrappingLibrary = new Interface(tarotWrappingAbi);
+        return tarotWrappingLibrary.encodeFunctionData('tarotSupplyVaultEnter', [
+            params.supplyVault,
+            params.sender,
+            params.recipient,
+            params.amount,
+            params.outputReference,
+        ]);
+    }
+    encodeLeave(params) {
+        const tarotWrappingLibrary = new Interface(tarotWrappingAbi);
+        return tarotWrappingLibrary.encodeFunctionData('tarotSupplyVaultLeave', [
+            params.supplyVault,
+            params.sender,
+            params.recipient,
+            params.amount,
+            params.outputReference,
+        ]);
+    }
+}
+
 class Relayer {
     constructor(swaps, config) {
         this.swaps = swaps;
@@ -8441,6 +8695,8 @@ class Relayer {
         this.vaultActionsService = new VaultActionsService();
         this.aaveWrappingService = new AaveWrappingService();
         this.booMirrorWorldStaking = new BooMirrorWorldStakingService();
+        this.reaperVaultService = new ReaperVaultService();
+        this.tarotSupplyVaultService = new TarotSupplyVaultService();
         this.fBeetsBarStakingService = new FBeetsBarStakingService();
         this.masterChefStakingService = new MasterChefStakingService();
         this.yearnWrappingService = new YearnWrappingService();
@@ -9060,6 +9316,24 @@ class Relayer {
                     break;
                 case 'boo':
                     unwrapCalls.push(this.booMirrorWorldStaking.encodeLeave({
+                        sender: funds.recipient,
+                        recipient: funds.sender,
+                        amount: key,
+                        outputReference: 0,
+                    }));
+                    break;
+                case 'reaper':
+                    unwrapCalls.push(this.reaperVaultService.encodeUnwrap({
+                        vaultToken: wrappedToken,
+                        sender: funds.recipient,
+                        recipient: funds.sender,
+                        amount: key,
+                        outputReference: 0,
+                    }));
+                    break;
+                case 'tarot':
+                    unwrapCalls.push(this.tarotSupplyVaultService.encodeLeave({
+                        supplyVault: wrappedToken,
                         sender: funds.recipient,
                         recipient: funds.sender,
                         amount: key,
