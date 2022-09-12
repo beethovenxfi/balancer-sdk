@@ -7053,7 +7053,6 @@ const NETWORKS_WITH_LINEAR_POOLS = [
     Network.RINKEBY,
     Network.GÖRLI,
     Network.KOVAN,
-    250,
 ];
 class SubgraphPoolDataService {
     constructor(client, provider, network, sorConfig) {
@@ -7248,13 +7247,12 @@ class Sor extends SOR {
         };
     }
     static getSorNetworkConfig(network) {
-        var _a, _b;
+        var _a;
         return {
             ...network,
             vault: network.addresses.contracts.vault,
             weth: network.addresses.tokens.wrappedNativeAsset,
             staBal3Pool: (_a = network.pools) === null || _a === void 0 ? void 0 : _a.staBal3Pool,
-            wethStaBal3: (_b = network.pools) === null || _b === void 0 ? void 0 : _b.wethStaBal3,
         };
     }
     static getPoolDataService(network, sorConfig, provider, subgraphClient) {
