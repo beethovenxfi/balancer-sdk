@@ -471,7 +471,7 @@
 
 "@balancer-labs/sor@github:beethovenxfi/balancer-sor#beethovenx-master":
   version "4.0.1-beta.5"
-  resolved "https://codeload.github.com/beethovenxfi/balancer-sor/tar.gz/b5bd426ee97df5f8b0ad20d80fd409f03e903b39"
+  resolved "https://codeload.github.com/beethovenxfi/balancer-sor/tar.gz/2f3d74cae65d4e5da07ca3753ce50867cc953497"
   dependencies:
     graphology "^0.24.1"
     isomorphic-fetch "^2.2.1"

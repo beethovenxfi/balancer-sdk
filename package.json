@@ -74,7 +74,7 @@
         "typescript": "^4.0.2"
     },
     "dependencies": {
-        "@balancer-labs/sor": "github:beethovenxfi/balancer-sor#daniel/generic-path-algo-build",
+        "@balancer-labs/sor": "github:beethovenxfi/balancer-sor#beethovenx-master",
         "axios": "^0.24.0",
         "graphql": "^15.6.1",
         "graphql-request": "^3.5.0",
